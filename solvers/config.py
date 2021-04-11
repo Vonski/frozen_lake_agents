@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 import yaml
@@ -7,9 +8,10 @@ ALGORITHMS = {
     "QLearning": QLearningAgent,
 }
 
-PROJECT_PATH = Path("..")
+PROJECT_PATH = Path(os.path.abspath(".")).parent
 CONFIGS_PATH = PROJECT_PATH / "configs"
 TRAINED_MODELS_PAATH = PROJECT_PATH / "trained_models"
+OUT_PATH = PROJECT_PATH / "out"
 
 
 def train_config(cli_args):

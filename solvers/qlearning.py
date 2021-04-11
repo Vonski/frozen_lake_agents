@@ -21,12 +21,19 @@ class QLearningAgent(RLAgent):
             - self.quality_table[old_state, action]
         )
 
+    @staticmethod
+    def _from_quality_table(quality_table):
+        new_agent = QLearningAgent(quality_table.shape[1], quality_table.shape[0])
+        new_agent.quality_table = quality_table
+        return new_agent
+
+    def copy(self):
+        return self.__class__._from_quality_table(self.quality_table)
+
     def save(self, filename_without_extension):
         np.save(filename_without_extension, self.quality_table)
 
     @staticmethod
     def load(filename):
         quality_table = np.load(filename)
-        new_agent = QLearningAgent(quality_table.shape[1], quality_table.shape[0])
-        new_agent.quality_table = quality_table
-        return new_agent
+        return QLearningAgent._from_quality_table(quality_table)

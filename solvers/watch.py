@@ -1,10 +1,15 @@
+import sys
+from datetime import datetime
 from parser import watch_parser
 
 import gym
 from config import watch_config
+from logger import get_logger
 
 
 def main():
+    timestamp = datetime.now().strftime("%d-%b-%Y_%H_%M_%S")
+    logger = get_logger(sys.argv[0], timestamp)
     cli_args = watch_parser().parse_args()
     algorithm, model_path, episodes_count, max_steps_in_episode = watch_config(cli_args)
 
@@ -25,11 +30,13 @@ def main():
             total_rewards += reward
             if done:
                 if reward:
-                    print("Success! Frisbee has been recovered!")
+                    logger.info("Success! Frisbee has been recovered!")
                 else:
-                    print("Failure! Blub, blub, blub...")
+                    logger.info("Failure! Blub, blub, blub...")
                 break
-    print(f"Wins: {total_rewards}/{episodes_count} ({100 * total_rewards / episodes_count:.2f}%)")
+    logger.info(
+        f"Wins: {total_rewards}/{episodes_count} ({100 * total_rewards / episodes_count:.2f}%)"
+    )
 
 
 if __name__ == "__main__":

@@ -11,6 +11,10 @@ class RLAgent(ABC):
         pass
 
     @abstractmethod
+    def copy(self):
+        pass
+
+    @abstractmethod
     def save(self, filename_without_extension):
         pass
 
