@@ -10,17 +10,20 @@ from plot import save_lineplot_with_best_epoch_marked
 
 
 def main():
+    # Setting parsing and configuration
     timestamp = datetime.now().strftime("%d-%b-%Y_%H_%M_%S")
     logger = get_logger(sys.argv[0], timestamp)
     cli_args = train_parser().parse_args()
     algorithm, config, output_path = train_config(cli_args)
 
+    # Environment setup
     env = gym.make("FrozenLake8x8-v0")
 
     state_space_size = env.observation_space.n
     action_space_size = env.action_space.n
     logger.info(f"{action_space_size}, {state_space_size}")
 
+    # Agent creation and training
     agent = algorithm(state_space_size, action_space_size, **config)
 
     epsilon = 0
@@ -62,6 +65,7 @@ def main():
             f"Epoch {epoch}: {100 * win_ratio:.2f}% ({int(total_rewards)}/{completed_episodes})"
         )
 
+    # Saving results
     agent.save(output_path)
     best_agent_output_path = output_path.parent / f"{output_path.name}_best"
     agent_from_best_epoch.save(best_agent_output_path)

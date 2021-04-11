@@ -8,15 +8,17 @@ from logger import get_logger
 
 
 def main():
+    # Setting parsing and configuration
     timestamp = datetime.now().strftime("%d-%b-%Y_%H_%M_%S")
     logger = get_logger(sys.argv[0], timestamp)
     cli_args = watch_parser().parse_args()
     algorithm, model_path, episodes_count, max_steps_in_episode = watch_config(cli_args)
 
+    # Environment and agent creation
     env = gym.make("FrozenLake8x8-v0")
-
     agent = algorithm.load(model_path)
 
+    # Rollout
     total_rewards = 0
     for episode in range(episodes_count):
         current_state = env.reset()

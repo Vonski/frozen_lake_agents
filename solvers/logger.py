@@ -6,7 +6,7 @@ from config import OUT_PATH
 LOG_PATH = OUT_PATH / "logs"
 
 
-def get_logger(script_path, timestamp):
+def get_logger(script_path: str, timestamp: str) -> logging.Logger:
     LOG_PATH.mkdir(parents=True, exist_ok=True)
 
     script_name = script_path.split("/")[-1]

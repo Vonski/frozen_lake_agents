@@ -1,14 +1,14 @@
 import argparse
 
 
-def train_parser():
+def train_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-a",
         "--algorithm",
         type=str,
         required=True,
-        help="Name of algorithm which should be used in training " "[QLearning, DQN, A2C]",
+        help="Name of algorithm which should be used in training " "[QLearning, DQN]",
     )
     parser.add_argument(
         "-cfg",
@@ -28,14 +28,14 @@ def train_parser():
     return parser
 
 
-def watch_parser():
+def watch_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-a",
         "--algorithm",
         type=str,
         required=True,
-        help="Name of algorithm which should be used in training" "[QLeraning, DQN, A2C]",
+        help="Name of algorithm which should be used in training" "[QLeraning, DQN]",
     )
     parser.add_argument("-m", "--model", type=str, required=True, help="Path to trained model.")
     parser.add_argument("-e", "--episode-count", type=int, help="Count of episodes to rollout.")
