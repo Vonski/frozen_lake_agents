@@ -1,3 +1,6 @@
+"""
+Lets to watch how trained agents deal with environment.
+"""
 import sys
 from datetime import datetime
 from parser import watch_parser

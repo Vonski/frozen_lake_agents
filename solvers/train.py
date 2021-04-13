@@ -1,3 +1,13 @@
+"""
+Trains chosen agent on chosen version of the FrozenLake8x8-v0 environment.
+Use following configuration values:
+is_slippery (bool) - it defines which version of the environment should be used.
+epochs_count - number of epochs in training.
+steps_per_epoch - number of steps in single epoch.
+max_epsilon - initial value of epsilon for epsilon-greedy exploration strategy.
+min_epsilon - minimal value of epsilon at the end of the training.
+epsilon_decay - exponential decay factor for epsilon. Epsilon is changed after each epoch.
+"""
 import sys
 from datetime import datetime
 from parser import train_parser
@@ -25,7 +35,7 @@ if __name__ == "__main__":
     # Agent creation and training
     agent = algorithm(state_space_size, action_space_size, **config)
 
-    epsilon = 1
+    epsilon = config["max_epsilon"]
     best_epoch = 0
     agent_from_best_epoch = agent.copy()
     win_ratio_over_time = []
