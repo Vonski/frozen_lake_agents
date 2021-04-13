@@ -9,13 +9,13 @@ I created two solutions for two different agents for two versions of this enviro
 QLearning with a lookup table was used to solve the slippery one. To solve the stable one I wrote Deep Q Network in torch (CPU only).
 
 ## Directory structure
-- configs - contains configuration files for `train.py` script for both algorithms.
-- outs - contains output files from scripts in `solvers`
+- `configs` - contains configuration files for `train.py` script for both algorithms.
+- `outs` - contains output files from scripts in `solvers`
         - logs - in this directory logs of `train.py` and `watch.py` scripts are generated.
         - plots - in this directory plots of learning progress from `train.py` script are generated.
-- solvers - contains python files that define algorithms and other utilities. `train.py` and `watch.py` are located there.
-- trained_models - contains serialized models. `train.py` settings of output path default to this directory.
-- requirements.txt - contains the list of libraries needed to run scripts successfully.
+- `solvers` - contains python files that define algorithms and other utilities. `train.py` and `watch.py` are located there.
+- `trained_models` - contains serialized models. `train.py` settings of output path default to this directory.
+- `requirements.txt` - contains the list of libraries needed to run scripts successfully.
 
 ## Setup
 To prepare an environment to run scripts from this repo install requirement (I recommend using virtualenv):
