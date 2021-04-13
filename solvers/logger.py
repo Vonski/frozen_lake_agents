@@ -7,6 +7,16 @@ LOG_PATH = OUT_PATH / "logs"
 
 
 def get_logger(script_path: str, timestamp: str) -> logging.Logger:
+    """
+    Returns logger that logs to stdout and unique file at the same time.
+
+    Args:
+        script_path: path to script that creates logs.
+        timestamp: text that differentiates created files between runs.
+
+    Returns:
+        Logger object.
+    """
     LOG_PATH.mkdir(parents=True, exist_ok=True)
 
     script_name = script_path.split("/")[-1]

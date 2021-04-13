@@ -2,6 +2,10 @@ import argparse
 
 
 def train_parser() -> argparse.ArgumentParser:
+    """
+    Returns:
+        Argument parser for train.py script.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-a",
@@ -29,6 +33,10 @@ def train_parser() -> argparse.ArgumentParser:
 
 
 def watch_parser() -> argparse.ArgumentParser:
+    """
+    Returns:
+        Argument parser for watch.py script.
+    """
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-a",
@@ -43,5 +51,12 @@ def watch_parser() -> argparse.ArgumentParser:
         "--max-steps-in-episode",
         type=int,
         help="Maximal number of steps in signle episode before termination.",
+    )
+    parser.add_argument(
+        "-ns",
+        "--not-slippery",
+        default=False,
+        action="store_true",
+        help="Flag for FrozenLake environment initialization",
     )
     return parser

@@ -9,6 +9,7 @@ class RLAgent(ABC):
     Abstraction for typical reinforcement learning agent. Defines interface for multiple RL
     algorithms which allows to train them with the same code.
     """
+
     @abstractmethod
     def get_action(self, current_state: int) -> int:
         """
@@ -27,7 +28,7 @@ class RLAgent(ABC):
         self, reward: int, action: int, current_state: int, old_state: int, **kwargs: Any
     ) -> None:
         """
-        Single iteration of agent learning. It could be used either in Temporal-Difference and
+        Single iteration of agent learning. It could be used either in Temporal Difference and
         Monte Carlo settings. Calls can be differentiated by custom keyword argument.
 
         Args:

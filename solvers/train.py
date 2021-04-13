@@ -8,8 +8,7 @@ from config import train_config
 from logger import get_logger
 from plot import save_lineplot_with_best_epoch_marked
 
-
-def main():
+if __name__ == "__main__":
     # Setting parsing and configuration
     timestamp = datetime.now().strftime("%d-%b-%Y_%H_%M_%S")
     logger = get_logger(sys.argv[0], timestamp)
@@ -17,7 +16,7 @@ def main():
     algorithm, config, output_path = train_config(cli_args)
 
     # Environment setup
-    env = gym.make("FrozenLake8x8-v0")
+    env = gym.make("FrozenLake8x8-v0", is_slippery=config["is_slippery"])
 
     state_space_size = env.observation_space.n
     action_space_size = env.action_space.n
@@ -26,7 +25,7 @@ def main():
     # Agent creation and training
     agent = algorithm(state_space_size, action_space_size, **config)
 
-    epsilon = 0
+    epsilon = 1
     best_epoch = 0
     agent_from_best_epoch = agent.copy()
     win_ratio_over_time = []
@@ -66,12 +65,8 @@ def main():
         )
 
     # Saving results
-    agent.save(output_path)
+    agent.save(str(output_path))
     best_agent_output_path = output_path.parent / f"{output_path.name}_best"
-    agent_from_best_epoch.save(best_agent_output_path)
+    agent_from_best_epoch.save(str(best_agent_output_path))
 
     save_lineplot_with_best_epoch_marked(win_ratio_over_time, best_epoch, timestamp)
-
-
-if __name__ == "__main__":
-    main()

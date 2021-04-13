@@ -1,11 +1,14 @@
-epochs_count: 5000
+epochs_count: 50
 steps_per_epoch: 5000
 max_epsilon: 1.0
-min_epsilon: 0.0001
-epsilon_decay: 0.005
+min_epsilon: 0.001
+epsilon_decay: 0.1
+is_slippery: false
 
-learning_rate: 0.8
-gamma: 0.99
+learning_rate: 0.001
+gamma: 0.9
 batch_size: 128
 
-success_ratio: 0.1
+target_update_episodes: 4
+
+replay_buffer_capacity: 10000
